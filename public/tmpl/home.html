@@ -1,0 +1,65 @@
+<br/>
+<div class="row">
+     <div class="col-md-3 col-xs-12"><h4 >Book Movie Tickets Online</h4></div>
+     
+     <div class="col-md-5 col-sm-5 col-xs-12"><input class="form-control" placeholder="Enter your favorite movie" data-ng-model="search" />    
+     </div>
+</div>
+<hr />
+    <div data-ng-show="favMovie.availability" class="alert alert-info alert-dismissible homeAlert" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <strong><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>You choose {{favMovie.name}}!</strong> 
+      <p> {{favMovie.review}}:</p>
+    </div>
+
+
+
+    <br/>
+    <br/>
+    <h4>Movies Screening :</h4>
+    
+
+
+    <div class="row">
+      <div class="col-sm-6 col-md-4"  data-ng-repeat="movie in movies | orderBy:'id' | filter:search">
+        <div class="thumbnail">
+          <a href="javascript:" data-ng-click="getMovieById(movie.id)"><img src={{movie.thumb}}  class="thumb-big"/></a>
+          <div class="caption">
+            <h3> {{movie.name}} </h3>
+            <p>...</p>
+            <p>
+                <span class="label label-warning availability">Availability ({{movie.availability}})</span>
+                <a ng-href="#/movie/{{movie.id}} " class="btn btn-primary" role="button">Review</a>
+                <a href="#/bookTickets/{{movie.id}} " class="btn btn-default" role="button">Book</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- FORM -->
+    <form class="col-md-4" ng-submit="processedForm()">
+        <!-- NAME -->
+        <div id="name-group" class="form-group" ng-class="{'has-error':errorName}">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Bruce Wayne" ng-model="formData.name">
+            <span class="help-block" ng-show="errorName">{{errorName}}</span>
+        </div>
+
+        <!-- SUPERHERO NAME -->
+        <div id="superhero-group" class="form-group">
+            <label>Superhero Alias</label>
+            <input type="text" name="superheroAlias" class="form-control" placeholder="Caped Crusader" ng-model="formData.alias">
+            <span class="help-block"></span>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" class="btn btn-success btn-lg btn-block">
+            <span class="glyphicon glyphicon-star"></span> Submit!
+        </button>
+
+        
+    </form>
